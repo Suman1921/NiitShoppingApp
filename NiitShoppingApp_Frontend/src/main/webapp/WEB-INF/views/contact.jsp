@@ -4,9 +4,9 @@
 
 	<div class="row">	
 		
-		<h1>About Us</h1>
+		<h1>Contact Us</h1>
 		<hr/>
-		<p>This is an about us page</p>	
+		<p>This is an contact us page</p>	
 	
 	</div>
 
