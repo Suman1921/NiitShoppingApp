@@ -8,6 +8,15 @@
   <name>NiitShoppingApp_Frontend Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+  
+  	<dependency>
+  		<groupId>com.Project</groupId>
+  		<artifactId>NiitShoppingApp_Backend</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  
+  
+  
   	
   	<!-- JAVAEE-API -->
 		<dependency>
