@@ -3,7 +3,9 @@ package com.Project.NiitShoppingApp_Backend.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,67 +14,30 @@ import com.Project.NiitShoppingApp_Backend.dao.CategoryDao;
 import com.Project.NiitShoppingApp_Backend.dto.Category;
 
 @Repository("categoryDao")
+@Transactional
 public class CategoryDaoImpl implements CategoryDao
 {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	private static List<Category> categories = new ArrayList<Category>();
-	
-	static
-	{
-		Category category = new Category();
-		
-		category.setCategoryId(1);
-		category.setCategoryName("Television");
-		category.setCategoryDescription("This is Television Category.");
-		
-		categories.add(category);
-		
-		
-		category = new Category();
-		
-		category.setCategoryId(2);
-		category.setCategoryName("Mobile");
-		category.setCategoryDescription("This is Mobile Category.");
-		
-		categories.add(category);
-		
-		
-		category = new Category();
-		
-		category.setCategoryId(3);
-		category.setCategoryName("Laptop");
-		category.setCategoryDescription("This is Laptop Category.");
-		
-		categories.add(category);
-		
-		
-		category = new Category();
-		
-		category.setCategoryId(4);
-		category.setCategoryName("T-Shirt");
-		category.setCategoryDescription("This is T-Shirt Category.");
-		
-		categories.add(category);
-	}
-	
-	
-	
+
 	public List<Category> list()
 	{
-		return categories;
+		String selectActiveCategory = "FROM Category WHERE active = :active";
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
+		
+		query.setParameter("active", true);
+		
+		return query.getResultList();
+		
+		
 	}
 	
 	
 	public Category get(int id)
 	{
-		for(Category category : categories)
-		{
-			if(category.getCategoryId() == id) return category;
-		}
-		
-		return null;
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
 	}
 	
 	
@@ -91,6 +56,38 @@ public class CategoryDaoImpl implements CategoryDao
 		}
 		
 		
+	}
+
+
+	public boolean update(Category category) 
+	{
+		try
+		{
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+	public boolean delete(Category category) 
+	{
+		category.setActive(false);
+		
+		try
+		{
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
