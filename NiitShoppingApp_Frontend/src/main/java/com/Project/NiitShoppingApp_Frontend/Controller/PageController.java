@@ -8,13 +8,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Project.NiitShoppingApp_Backend.dao.CategoryDao;
+import com.Project.NiitShoppingApp_Backend.dao.ProductDao;
 import com.Project.NiitShoppingApp_Backend.dto.Category;
+import com.Project.NiitShoppingApp_Backend.dto.Product;
+import com.Project.NiitShoppingApp_Frontend.Exception.ProductNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class PageController 
 {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+	
 	@Autowired
 	private CategoryDao categoryDao;
+	
+	@Autowired
+	private ProductDao productDao;
 	
 	
 	@RequestMapping(value = {"/" , "/index" , "/home"})
@@ -22,6 +34,10 @@ public class PageController
 	{
 		ModelAndView mv = new ModelAndView("index");
 		mv.addObject("title" , "Home");
+		
+		logger.info("Inside PageController index method - INFO");
+		logger.debug("Inside PageController index method - DEBUG");
+		
 		
 		mv.addObject("categories" , categoryDao.list());
 		
@@ -78,6 +94,30 @@ public class PageController
 		mv.addObject("category" , category);
 		mv.addObject("userClickCategoryProducts" , true);
 		return mv;
+		
+	}
+	
+	@RequestMapping(value = "/show/{id}/product")
+	public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException
+	{
+		ModelAndView mv = new ModelAndView("index");
+		
+		Product product = productDao.get(id);
+		
+		if(product == null) throw new ProductNotFoundException();
+		
+		//update view content...
+		product.setViews(product.getViews() + 1);
+		productDao.update(product);
+		
+		
+		mv.addObject("title" , product.getName());
+		mv.addObject("product" , product);
+		
+		mv.addObject("userClickShowProduct" , true);
+		
+		return mv;
+		
 		
 	}
 	

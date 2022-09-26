@@ -47,61 +47,60 @@
     <!-- Custom CSS -->
     <link href="${css }/myapp.css" rel="stylesheet">
 
-
 </head>
 
 <body>
-	
-	<div class="wrapper">
-    	<!-- Navigation -->
-    	<%@include file="./shared/navbar.jsp" %>
-		<div class="content">
-    	<!-- Page Content -->
-	    <c:if test="${userClickHome == true }">
-	    	<%@include file="home.jsp" %>
-	    </c:if>
-	    
-	    <c:if test="${userClickAbout == true }">
-	    	<%@include file="about.jsp" %>
-	    </c:if>
-	    
-	    <c:if test="${userClickContact == true }">
-	    	<%@include file="contact.jsp" %>
-	    </c:if>
-	    
-	    <c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
-	    	<%@include file="listProducts.jsp" %>
-	    </c:if>
-	    
-	    <c:if test="${userClickShowProduct == true}">
-	    	<%@include file="singleProduct.jsp" %>
-	    </c:if>
-	    
-	    
-	    <!-- /.container -->
-		</div>
-	    <%@include file="./shared/footer.jsp" %>
-	    <!-- /.container -->
-	
-    <!-- jQuery -->
-    <script src="${js }/jquery.js"></script>
-    <script src="${js}/jquery.validate.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${js }/bootstrap.min.js"></script>
-    
-    <!-- Datatable JS -->
-    
-    <script src="${js }/jquery.dataTables.js"></script>
-    
-    <script src="${js }/dataTables.bootstrap.js"></script>
-    
-    <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js">-->
-    
-	<script src="${js }/myscript.js"></script>
-	
-	
+	<div class="wrapper">
+
+	    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container">
+	            <!-- Brand and toggle get grouped for better mobile display -->
+	            <div class="navbar-header">
+	                <a class="navbar-brand" href="${contextRoot}/home">Home</a>
+	            </div>
+			</div>
+		</nav>
+			
+		
+		<div class="content">
+		
+			<div class="container">
+			
+				<div class="row">
+				
+					<div class="col-xs-12">
+					
+						
+						<div class="jumbotron">
+						
+							<h1>${errorTitle}</h1>
+							<hr/>
+						
+							<blockquote style="word-wrap:break-word">
+								
+								${errorDescription}
+							
+							</blockquote>						
+						
+						</div>
+						
+											
+					</div>					
+				
+				</div>
+			
+			</div>
+							
+		</div>
+
+		
+		<%@include file="./shared/footer.jsp" %>
+
 	</div>
+		
+	
 </body>
+
 
 </html>
