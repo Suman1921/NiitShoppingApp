@@ -24,6 +24,10 @@
     											<!-- /WEB-INF/views/hello.jsp -->
     </bean>
     
+    <bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
+    id="multipartResolver" />
+    
+    
     <!-- Loading static resources -->
 	<mvc:annotation-driven />
 	
