@@ -46,6 +46,7 @@ public class CategoryDaoImpl implements CategoryDao
 	{
 		try
 		{
+			category.setActive(true);
 			sessionFactory.getCurrentSession().persist(category);
 			return true;
 		}
