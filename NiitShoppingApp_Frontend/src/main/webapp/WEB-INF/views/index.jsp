@@ -100,6 +100,8 @@
     
     <script src="${js }/dataTables.bootstrap.js"></script>
     
+    <script src="${js }/bootbox.min.js"></script>
+    
     <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js">-->
     
 	<script src="${js }/myscript.js"></script>
