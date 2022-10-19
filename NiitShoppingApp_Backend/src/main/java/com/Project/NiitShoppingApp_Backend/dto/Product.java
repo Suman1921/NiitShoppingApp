@@ -8,6 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,13 +30,24 @@ public class Product implements Serializable
 	private int id;
 	@JsonIgnore
 	private String code;
+	
+	@NotBlank(message = "Please Enter The Product Name")
 	private String name;
+	
+	@NotBlank(message = "Please Enter The Brand Name")
 	private String brand;
+	
 	@JsonIgnore
+	@Size(min=10, max=250, message = "Description should be between 10 to 250 characters")
 	private String description;
+	
+	@Min(value = 0, message = "Price cannot be less than zero")
 	private double unit_price;
+	
+	@Min(value = 0, message = "Quantity cannot be less than zero")
 	private int quantity;
-	@JsonIgnore
+	
+	
 	private boolean is_active;
 	@JsonIgnore
 	private int category_id;
@@ -38,7 +56,21 @@ public class Product implements Serializable
 	private int purchases;
 	private int views;
 	
+	@Transient
+	private MultipartFile file;
 	
+	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+
 	public Product()
 	{
 		this.code = UUID.randomUUID().toString().substring(26).toUpperCase();
