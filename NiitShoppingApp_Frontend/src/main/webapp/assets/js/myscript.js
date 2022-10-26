@@ -255,6 +255,45 @@ $(function() {
 	}
 	
 	
+	// validating the product form element	
+	// fetch the form element
+	$categoryForm = $('#categoryForm');
+	
+	if($categoryForm.length) {
+		
+		$categoryForm.validate({			
+				rules: {
+					categoryName : {
+						required: true,
+						minlength: 3
+					},
+					categoryDescription : {
+						required: true,
+						minlength: 3					
+					}				
+				},
+				messages : {					
+					categoryName : {
+						required: 'Please enter product name!',
+						minlength: 'Please enter atleast five characters'
+					},
+					categoryDescription : {
+						required: 'Please enter product name!',
+						minlength: 'Please enter atleast five characters'
+					}					
+				},
+				errorElement : "em",
+				errorPlacement : function(error, element) {
+					error.addClass('help-block');
+					error.insertAfter(element);
+				}				
+			}
+		
+		);
+		
+	}
+	
+	
 	
 });
 
