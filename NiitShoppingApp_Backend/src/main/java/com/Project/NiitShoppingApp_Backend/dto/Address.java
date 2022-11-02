@@ -1,19 +1,28 @@
 package com.Project.NiitShoppingApp_Backend.dto;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="NiitShoppingApp_Address")
-public class Address 
+public class Address implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int userId;
+	
+	
+	
+	
 	private String addressLineOne;
 	private String addressLineTwo;
 	private String city;
@@ -30,12 +39,7 @@ public class Address
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	
 	public String getAddressLineOne() {
 		return addressLineOne;
 	}
@@ -85,12 +89,13 @@ public class Address
 		this.billing = billing;
 	}
 	
+
 	
-	public Address(int id, int userId, String addressLineOne, String addressLineTwo, String city, String state,
+	
+	public Address(int id, User user, String addressLineOne, String addressLineTwo, String city, String state,
 			String country, String postalCode, boolean shipping, boolean billing) {
 		super();
 		this.id = id;
-		this.userId = userId;
 		this.addressLineOne = addressLineOne;
 		this.addressLineTwo = addressLineTwo;
 		this.city = city;
@@ -100,20 +105,20 @@ public class Address
 		this.shipping = shipping;
 		this.billing = billing;
 	}
-	
-	
 	public Address() {
 		super();
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Address [id=" + id + ", userId=" + userId + ", addressLineOne=" + addressLineOne + ", addressLineTwo="
-				+ addressLineTwo + ", city=" + city + ", state=" + state + ", country=" + country + ", postalCode="
-				+ postalCode + ", shipping=" + shipping + ", billing=" + billing + "]";
+	@Column(name = "user_id")
+	private int userId;
+
+	public int getUserId() {
+		return userId;
 	}
-	
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	
 	
 

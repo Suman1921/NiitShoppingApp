@@ -53,7 +53,6 @@ public class UserTest
 		address.setCountry("India");
 		address.setPostalCode("700041");
 		address.setBilling(true);
-		address.setUserId(user.getId());
 		
 		//add the user
 		assertEquals("Failed to add address!", true, userDao.addAddress(address));

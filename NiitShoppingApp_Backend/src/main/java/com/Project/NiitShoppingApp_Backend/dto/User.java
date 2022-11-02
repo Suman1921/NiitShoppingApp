@@ -1,5 +1,7 @@
 package com.Project.NiitShoppingApp_Backend.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="NiitShoppingApp_User")
-public class User 
+public class User implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,6 +27,18 @@ public class User
 	private String password;
 	private String role;
 	private boolean enable= true;
+	
+	@Transient
+	private String confirmPassword;
+	
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
 	
 	@OneToOne(mappedBy = "user" , cascade = CascadeType.ALL)
 	private Cart cart;
